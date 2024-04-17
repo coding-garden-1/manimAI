@@ -1,0 +1,398 @@
+**Example:** 
+```python
+circ = Circumscribe(mobj, shape=Rectangle, fade_in=True, color=BLUE, run_time=2)
+```
+Creates a Circumscribe animation that fades in a blue rectangle surrounding `mobj` over a 2-second duration.
+1. **Flash:**
+   - Syntax: `Flash(point, line_length, num_lines, flash_radius, line_stroke_width, color, time_width, run_time, **kwargs)`
+   - Description: Sends out lines in all directions from a specified center.
+   - Example: `flash_anim = Flash(ORIGIN, 1, 8, 2, 2, RED, time_width=1, run_time=2)`
+
+2. **create_line_anims:**
+   - Syntax: `create_line_anims()`
+   - Description: Method to create line animations within the Flash object.
+
+3. **create_lines:**
+   - Syntax: `create_lines()`
+   - Description: Method to create lines within the Flash object.
+**Command Syntax:**
+```
+class manim.animation.indication.FocusOn(*args, **kwargs)
+```
+
+**Usage:**  
+Shrink a spotlight to a position.  
+**Parameters:**  
+- `focus_point (Union[ndarray, Mobject])`: The point at which to shrink the spotlight.  
+- `opacity (float)`: The opacity of the spotlight.  
+- `color (str)`: The color of the spotlight.  
+- `run_time (float)`: The duration of the animation.  
+- `kwargs`: Additional arguments to be passed to the Succession constructor.  
+
+**Example:**  
+```python
+from manim import *
+
+class FocusOnExample(Scene):
+    def construct(self):
+        mobj = Circle(color=RED)
+        self.play(FocusOn(mobj, opacity=0.7, color=BLUE, run_time=2))
+```
+
+**Additional Methods:**  
+- `create_target()`
+
+**Attributes:**  
+- `path_arc`
+- `path_func`
+- **ApplyWave**
+  - Syntax: `self.play(ApplyWave(mobject))`
+  - Temporarily distorts the mobject by sending a wave through it.
+
+- **Circumscribe**
+  - Syntax: `self.play(Circumscribe(mobject))`
+  - Draws a temporary line surrounding the mobject.
+
+- **Flash**
+  - Syntax: `self.play(Flash(mobject))`
+  - Sends out lines in all directions from the mobject.
+
+- **FocusOn**
+  - Syntax: `self.play(FocusOn(mobject))`
+  - Shrinks a spotlight effect to a position on the mobject.
+
+- **Indicate**
+  - Syntax: `self.play(Indicate(mobject))`
+  - Temporarily resizes and recolors the mobject to indicate it.
+
+- **ShowCreationThenFadeOut**
+  - Deprecated and no longer recommended for use.
+
+- **ShowPassingFlash**
+  - Syntax: `self.play(ShowPassingFlash(mobject))`
+  - Shows only a small section of the VMobject in each frame.
+
+- **Wiggle**
+  - Syntax: `self.play(Wiggle(mobject))`
+  - Causes the mobject to wiggle or shake.
+**Command Syntax:**
+```python
+Indicate(mobject, scale_factor=1.5, color="YELLOW", rate_func=linear, **kwargs)
+```
+
+**Usage:** Indicates a Mobject by temporarily resizing and recoloring it.
+
+- **mobject (Mobject):** The Mobject to indicate.
+- **scale_factor (float):** The factor by which the Mobject will be temporarily scaled.
+- **color (str):** The color the Mobject temporarily takes.
+- **rate_func (Callable[[float, Optional[float]], ndarray]):** The function defining the animation progress at every point in time.
+- **kwargs:** Additional arguments to be passed to the Succession constructor.
+
+**Example:**
+```python
+from manim.animation.indication import Indicate
+from manim import Circle
+
+my_circle = Circle()
+indication_anim = Indicate(my_circle, scale_factor=2, color="BLUE", rate_func=some_rate_func)
+```
+
+This command is used to temporarily resize and recolor a Mobject for indication purposes with additional customization through parameters like scale_factor, color, and rate_func.
+Command: Create then FadeOut
+
+Usage: CreateThenFadeOut(mobject, remover=True)
+
+Example: CreateThenFadeOut(square)
+- **Command Syntax:**
+```python
+class ShowPassingFlashWithThinningStrokeWidth(AnimationGroup)
+```
+
+- **Usage:**
+Extends the AnimationGroup class to create an animation that shows a passing flash with thinning stroke width.
+
+- **Example:**
+```python
+class MyFlashAnimation(ShowPassingFlashWithThinningStrokeWidth):
+    def construct(self):
+        # Add animation objects or properties
+```
+In this example, a custom animation class `MyFlashAnimation` is created which inherits from `ShowPassingFlashWithThinningStrokeWidth`.
+- **Command**: `manim.animation.indication.ShowPassingFlash`
+
+- **Syntax**:
+```python
+class ShowPassingFlash(ShowPartial):
+    def __init__(self, mobject: VMobject, time_width: float):
+        '''Initialize the ShowPassingFlash class'''
+        
+    def clean_up_from_scene(self, scene: Scene):
+        '''Clean up the Scene after finishing the animation'''
+```
+
+- **Usage**:
+```python
+flash_anim = ShowPassingFlash(mobject=my_vmobject, time_width=0.5)
+```
+
+- **Example**:
+```python
+flash_anim = ShowPassingFlash(mobject=my_vmobject, time_width=0.5)
+```
+Creates a passing flash animation with specified time width for a given VMobject.
+1. **Command:** `Wiggle`
+   - **Syntax:** `Wiggle(mobject, scale_value, rotation_angle, n_wiggles, scale_about_point=None, rotate_about_point=None, run_time)`
+   - **Usage:** A command used in Manim to create a wiggle effect on a Mobject with specified parameters.
+   - **Example:** `Wiggle(square, 1.5, PI/8, 3, rotate_about_point=[2,3,0], run_time=1)`
+
+2. **Command:** `get_rotate_about_point`
+   - **Syntax:** `get_rotate_about_point`
+   - **Usage:** Returns the point around which the Mobject gets rotated.
+   - **Example:** `rotate_point = mobject.get_rotate_about_point()`
+
+3. **Command:** `get_scale_about_point`
+   - **Syntax:** `get_scale_about_point`
+   - **Usage:** Returns the point about which the Mobject gets scaled.
+   - **Example:** `scale_point = mobject.get_scale_about_point()`
+
+4. **Command:** `interpolate_submobject`
+   - **Syntax:** `interpolate_submobject`
+   - **Usage:** Interpolates the submobject based on certain parameters.
+   - **Example:** `mobject.interpolate_submobject(some_parameter)`
+Command syntax:
+```python
+ComplexHomotopy(complex_homotopy: Callable[[complex], float], mobject: Mobject)
+```
+
+- `complex_homotopy` (Callable[[complex], float]): A callable function that maps complex numbers to floats.
+- `mobject` (Mobject): The Mobject to which the homotopy will be applied.
+
+Example:
+```python
+from manim.animation.movement import ComplexHomotopy
+
+def function(z):
+    return abs(z)
+
+mobject = Circle()
+complex_homotopy = ComplexHomotopy(function, mobject)
+```
+- `Homotopy(homotopy: Callable[[float, float, float, float], tuple[float, float, float]], mobject: Mobject, run_time: float, apply_function_kwargs: dict[str, Any] | None, **kwargs)`:
+  - A class for creating animations that transform the points of a Mobject using a specified transformation function.
+  - Example: `homotopy_anim = Homotopy(homotopy=custom_function, mobject=shape, run_time=2)`
+
+- `function_at_time_t(t: float)`:
+  - Method that calculates the transformation function at a specific time \(t\).
+  
+- `interpolate_submobject(start: Mobject, end: Mobject, alpha: float)`:
+  - Method that interpolates between the start and end Mobjects based on the alpha value.
+
+1. **ComplexHomotopy**:
+   - Command Syntax: `ComplexHomotopy`
+   - Usage: Represents a function from [0, 1] to the complex plane.
+   - Example: `comp_homotopy = ComplexHomotopy()`
+
+2. **Homotopy**:
+   - Command Syntax: `Homotopy`
+   - Usage: Represents a homotopy between two functions.
+   - Example: `homotopy = Homotopy()`
+
+3. **MoveAlongPath**:
+   - Command Syntax: `MoveAlongPath(something_to_be_moved, path_mobject)`
+   - Usage: Makes one mobject move along the path of another mobject.
+   - Example: `MoveAlongPath(circle, line)`
+
+4. **PhaseFlow**:
+   - Command Syntax: `PhaseFlow`
+   - Usage: Represents a phase flow in mathematics.
+   - Example: `phase_flow = PhaseFlow()`
+
+5. **SmoothedVectorizedHomotopy**:
+   - Command Syntax: `SmoothedVectorizedHomotopy`
+   - Usage: Represents a smoothed vectorized homotopy.
+   - Example: `smoothed_homotopy = SmoothedVectorizedHomotopy()`
+Command: ``MoveAlongPath``
+Base Class: ``Animation``
+
+- Syntax: ``class manim.animation.movement.MoveAlongPath(scene, mobject, path, **kwargs)``
+
+Important Methods:
+1. ``interpolate_mobject``
+   - Syntax: ``interpolate_mobject(alpha)``
+   - Usage: Interpolates the mobject of the Animation based on alpha value.
+   - Parameters: 
+     - ``alpha`` (float): A float between 0 and 1 expressing the ratio to which the animation is completed.
+
+- Example:
+```python
+from manim import *
+
+class MoveAlongPathExample(Scene):
+    def construct(self):
+        circle = Circle()
+        square = Square()
+        self.play(MoveAlongPath(square, circle))
+```
+In this example, the square mobject moves along the path of the circle mobject.
+
+- **interpolate_mobject**
+  - **Function:** Interpolates the mobject of the Animation based on alpha value.
+  - **Syntax:** 
+    ```python
+    interpolate_mobject(function: Callable[[np.ndarray], np.ndarray], mobject: Mobject, virtual_time: float, suspend_mobject_updating: bool, rate_func: Callable[[float], float], alpha: float) -> None
+    ```
+  - **Parameters:** 
+    - *function (Callable[[np.ndarray], np.ndarray])*: The function that takes and returns arrays.
+    - *mobject (Mobject)*: The mobject to be interpolated.
+    - *virtual_time (float)*: The virtual time of the animation.
+    - *suspend_mobject_updating (bool)*: A boolean to suspend mobject updating.
+    - *rate_func (Callable[[float], float])*: A function that maps alpha to alpha with eased progress.
+    - *alpha (float)*: A float between 0 and 1 representing the completion ratio of the animation.
+  - **Example:** 
+    ```python
+    interpolate_mobject(my_function, my_mobject, 2.5, True, my_rate_func, 0.75)
+    ```
+Command: interpolate_submobject
+
+Syntax:
+interpolate_submobject(homotopy: Callable[[float, float, float, float], tuple[float, float, float]], mobject: Mobject, run_time: float, apply_function_kwargs: Optional[Dict[str, Any]] = None)
+
+Description:
+This command method interpolates a submobject based on the provided homotopy function and applies it to the provided mobject.
+
+Parameters:
+- homotopy: A callable function defining the interpolation behavior.
+- mobject: The Mobject to interpolate.
+- run_time: The duration of the animation.
+- apply_function_kwargs: Additional keyword arguments for applying the function (optional).
+
+Example:
+interpolate_submobject(
+    lambda t, m, n, b: (t * m, t * n, t * b),
+    circle,
+    2,
+    {"group": True}
+)
+Command: manim.animation.numbers.ChangeDecimalToValue
+
+Description: This class is used for animating the change of a DecimalNumber to a specific target number.
+
+Syntax:
+```python
+class ChangeDecimalToValue(ChangingDecimal):
+    def __init__(self, decimal_mob, target_number):
+```
+
+Usage: 
+Animate a DecimalNumber to change to a target number:
+```python
+self.play(ChangeDecimalToValue(decimal_number, 42))
+```
+- `check_validity_of_input()`
+    - Check the validity of the input for the ChangingDecimal animation.
+    - No specific syntax provided.
+
+- `interpolate_mobject(decimal_mob, number_update_func, suspend_mobject_updating)`
+    - Interpolates the mobject of the Animation based on alpha value.
+    - `decimal_mob` (DecimalNumber): The DecimalNumber object to be interpolated.
+    - `number_update_func` (Callable[[float], float]): A function that updates the number.
+    - `suspend_mobject_updating` (bool | None): Flag to suspend mobject updating during interpolation.
+
+Example:
+```python
+changing_decimal = ChangingDecimal(decimal_mob=some_decimal, number_update_func=lambda x: x*2, suspend_mobject_updating=False)
+```
+
+- `alpha` (float)
+    - A float between 0 and 1 expressing the completion ratio of the animation.
+    - For example, values of 0, 0.5, and 1 correspond to the animation being completed 0%, 50%, and 100%, respectively.
+### Important Commands:
+1. **Classes** - Describes and lists the classes in the file.
+   - Syntax: 
+     ```
+     Classes
+     ```
+   - Example: 
+     ```
+     Classes
+     ```
+
+2. **ChangeDecimalToValue** - Initiates the process of changing a decimal number to a specified value.
+   - Syntax: 
+     ```
+     ChangeDecimalToValue <decimal_number> <target_value> <time_duration>
+     ```
+   - Example: 
+     ```
+     ChangeDecimalToValue 5.5 10 3s
+     ```
+
+3. **ChangingDecimal** - Command to change a decimal value to another value. 
+   - Syntax: 
+     ```
+     ChangingDecimal <decimal_number> to <new_value> during <time_duration>
+     ```
+   - Example: 
+     ```
+     ChangingDecimal 3.33 to 7.5 during 2s
+     ```
+1. **Rotate Class:**
+```python
+class Rotate(Transform):
+    def __init__(self, mobject, angle, axis=OUT):
+        super().__init__(mobject)
+        # Initialization code
+```
+- Used to create a rotation animation for a given Mobject.
+- `mobject`: the Mobject to be rotated.
+- `angle`: the angle of rotation in radians.
+- `axis`: the axis of rotation (default is `OUT`).
+
+Example:
+```python
+rotation = Rotate(square, angle=PI/2, axis=UP)
+```
+
+2. **Rotating Function:**
+```python
+def Rotating(mobject, angle, axis=OUT, **kwargs):
+    # Implementation code
+```
+- Function for generating a rotation animation for a specific Mobject.
+- `mobject`: the Mobject to rotate.
+- `angle`: the angle of rotation in radians.
+- `axis`: the axis of rotation (default is `OUT`).
+- Additional keyword arguments for customization.
+
+Example:
+```python
+Rotating(triangle, angle=-PI/3, axis=RIGHT)
+```
+**Command:**  
+```python
+manim.animation.rotation.Rotate(mobject, angle, axis, about_point=None, about_edge=None)
+```
+
+**Usage:**  
+Animation that rotates a Mobject.
+
+**Example:**  
+```python
+rotation_anim = Rotate(square, angle=PI/2, axis=OUT, about_point=[2, 2, 0])
+self.play(rotation_anim)
+```
+**Command Syntax and Usage:**
+```python
+class manim.animation.rotation.Rotating(manim.animation.animation.Animation)
+```
+
+**Methods:**
+1. ```interpolate_mobject```
+   - Interpolates the mobject of the Animation based on alpha value.
+   - Syntax: 
+     ```python
+     interpolate_mobject(mobject, axis, radians, about_point, about_edge, run_time, rate_func, alpha)
+     ```
+   - Parameters:
+     - mobject (Mobject)
+     - axis (np.ndarray)

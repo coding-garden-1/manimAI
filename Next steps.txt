@@ -1,0 +1,5 @@
+Intelligent AI
+We have action to manim
+We need math lecture to action pipeline
+
+Cleanup AI that knowsh w to fix anye rrors, knows what we have imported available and not (list of 0.18.0 modules ettc)

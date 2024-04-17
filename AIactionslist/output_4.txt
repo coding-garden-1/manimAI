@@ -1,0 +1,466 @@
+     - radians (np.ndarray)
+     - about_point (np.ndarray | None)
+     - about_edge (np.ndarray | None)
+     - run_time (float)
+     - rate_func (Callable[[float], float])
+     - alpha (float) - A float between 0 and 1 expressing the ratio to which the animation is completed.
+   
+   - Example:
+     ```python
+     interpolate_mobject(some_mobject, np.array([1, 0, 0]), 2 * PI, None, None, 2, linear, 0.5)
+     ```
+Command Syntax: 
+```python
+Broadcast(mobject, focal_point=ORIGIN, n_mobs=5, initial_opacity=1, final_opacity=0, initial_width=0.0, remover=True, lag_ratio=0.2, run_time=3, **kwargs)
+```
+
+Usage:
+Animate broadcasting a mobject starting from an initial width to its actual size.
+
+Example:
+```python
+self.play(Broadcast(square))
+```
+**Classes (in Python)**
+
+- *Syntax*: `class ClassName:`
+  
+- *Usage*: Used to define a new class in Python.
+
+- *Example*: 
+  ```python
+  class Person:
+      def __init__(self, name, age):
+          self.name = name
+          self.age = age
+  ```  
+
+**Broadcast (in Manim)**
+
+- *Syntax*: `self.play(Broadcast(mobject, initial_width))`
+
+- *Usage*: Broadcasting an mobject from a specified initial width to its actual size.
+
+- *Example*: 
+  ```python
+  self.play(Broadcast(circle, initial_width=0.5))
+  ```  
+- **ChangeSpeed Command Syntax and Usage**:
+```python
+class manim.animation.speedmodifier.ChangeSpeed(Animation):
+    def __init__(self, anim, speedinfo, rate_func=None, affects_speed_updaters=False):
+
+    @classmethod
+    def add_updater(cls, mobject, update_function, index=None, call_updater=True):
+    
+    def begin(self):
+    
+    def clean_up_from_scene(self, scene):
+    
+    def finish(self):
+    
+    def get_scaled_total_time(self) -> float:
+    
+    def interpolate(self, alpha):
+    
+    def update_mobjects(self, dt):
+```
+
+- **ChangeSpeed Example**:
+```python
+anim = SomeAnimation()
+speed_changes = {0.5: 0.5, 0.8: 1.2}
+modified_animation = ChangeSpeed(anim, speed_changes)
+```
+
+- **ChangeSpeed.add_updater Syntax and Usage**:
+```python
+@classmethod
+def add_updater(mobject, update_function, index=None, call_updater=True):
+```
+
+- **ChangeSpeed.add_updater Example**:
+```python
+mobj = some_mobject
+def update_fn():
+    # Update logic here
+ChangeSpeed.add_updater(mobj, update_fn)
+```
+- `ChangeSpeed`
+   - Modifies the speed of a passed animation.
+   - Syntax: `ChangeSpeed(animation, speed)`
+   - Example: `ChangeSpeed(myAnimation, 2)`
+- Command syntax: ApplyComplexFunction(function, mobject, path_func=None, path_arc=None)
+- Usage: Allows the application of a complex function to a Mobject over a specified path.
+- Example:
+```python
+ApplyComplexFunction(lambda x: x**2, circle)
+```
+- **Syntax**: `create_target`
+- **Usage**: Generates target mobject based on the function applied.
+- **Example**: 
+```python
+create_target()
+```
+**Command:**
+ApplyMatrix(matrix, mobject, about_point=ORIGIN, **kwargs)
+
+**Usage:**
+Applies a matrix transformation to a specified mobject about a given point.
+
+**Parameters:**
+1. matrix (np.ndarray): The transformation matrix.
+2. mobject (Mobject): The Mobject to transform.
+3. about_point (np.ndarray): The origin point for the transformation. Default is ORIGIN.
+4. kwargs: Additional keyword arguments passed to ApplyPointwiseFunction.
+
+**Example:**
+```python
+from manim.animation.transform import ApplyMatrix
+import numpy as np
+
+matrix_transform = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+mobject_to_transform = Circle()
+transformed_mobject = ApplyMatrix(matrix=matrix_transform, mobject=mobject_to_transform)
+```
+
+**Methods:**
+1. initialize_matrix
+
+**Attributes:**
+1. path_arc
+2. path_func
+1. **Syntax**:
+```python
+ApplyMethod(mobject, method, *args, **kwargs)
+```
+
+2. **Usage**:
+ - Animates a Mobject by applying a method to it.
+ - The method should return the modified Mobject.
+ 
+3. **Example**:
+```python
+anim = ApplyMethod(circle, circle.shift, UP)
+```
+
+4. **Additional Commands**:
+ - `check_validity_of_input()`: Method to check the validity of input.
+ - `create_target()`: Method to create the target for animation.
+ 
+- **Syntax**: `manim.animation.transform.ApplyPointwiseFunctionToCenter(function, mobject=None, **kwargs)`
+- **Usage**: Begin the animation by applying a pointwise function to the center of a given mobject.
+- **Example**:
+  ```python
+  anim = ApplyPointwiseFunctionToCenter(
+    lambda point: point + UP,
+    circle
+  )
+  self.play(anim)
+  ```
+**Command:**
+```python
+ApplyPointwiseFunction(path_func: Callable[[float], Union[complex, Tuple[float, float]]], mobject: 'Mobject', run_time: float = 1, **kwargs: Any)
+```
+
+**Usage:**
+Animation that applies a pointwise function to a mobject.
+
+**Attributes:**
+- `path_arc`
+- `path_func`
+- `function (types.MethodType)`
+- `mobject (Mobject)`
+- `run_time (float)`
+
+**Example:**
+```python
+anim = ApplyPointwiseFunction(
+        lambda point: complex(np.cos(TAU * np.real(point)), np.sin(TAU * np.imag(point))),
+        square
+    )
+```
+Command: ClockwiseTransform
+Syntax: ClockwiseTransform(mobject, target_mobject, path_arc)
+Usage: Transforms the points of a mobject along a clockwise oriented arc. 
+Example: ClockwiseTransform(circle, square, PI/2) 
+Additional Information: 
+- path_func: The function describing the arc that the mobject will follow.
+- See also: Transform, CounterclockwiseTransform
+Commands:
+
+1. Class Definition:
+```python
+class CounterclockwiseTransform(Transform):
+```
+
+2. Initializer:
+```python
+def __init__(self, mobject, target_mobject, path_arc):
+```
+
+3. Attributes assignment:
+```python
+self.path_arc = path_arc
+```
+
+4. Usage examples:
+```python
+transform = CounterclockwiseTransform(mobject, target_mobject, 2*np.pi)
+```
+Command: CyclicReplace(mobjects, path_arc, **kwargs)
+
+Description: An animation moving mobjects cyclically, where each mobject takes the place of the next one in a cyclic manner.
+
+- mobjects (Mobject): List of mobjects to be transformed.
+- path_arc (float): The angle of the arc (in radians) that the mobjects will follow to reach their target.
+- kwargs: Further keyword arguments that are passed to Transform.
+
+Example:
+```python
+CyclicReplace(mobjects=[mobject1, mobject2, mobject3], path_arc=PI/2)
+```
+
+Method:
+- create_target: Creates the target mobject for the animation.
+
+Attributes:
+- path_arc: The angle of the arc in radians that the mobjects will follow.
+- path_func: Function describing the path followed by mobjects during transformation.
+Command: FadeToColor(mobject: Mobject, color: str, **kwargs)
+
+Description: Animation that changes the color of a mobject.
+
+Attributes:
+- path_arc: Controls how the color fades (path-related parameter)
+- path_func: Controls the function to determine the path for fading
+- mobject: The Mobject to apply the fade animation to
+- color: The color to fade to
+
+Usage Example:
+```python
+fade_to_red = FadeToColor(circle, RED)
+self.play(fade_to_red)
+```
+- **Command**: FadeTransformPieces
+- **Syntax**: FadeTransformPieces(FadeTransform)
+- **Usage**: Fades submobjects of one mobject into submobjects of another one.
+- **Example**:
+  ```python
+  fade_transform = FadeTransformPieces(mobject_source, mobject_target)
+  fade_transform.begin()
+  fade_transform.ghost_to()
+  ```
+**Methods**:
+- **begin**: Initial setup for the animation.
+- **ghost_to**: Replaces the source submobjects by the target submobjects and sets the opacity to 0.
+
+**Attributes**:
+- **path_arc**
+- **path_func**
+1. **FadeTransform**:
+   - `class FadeTransform(Transform)`
+      - Fades one mobject into another.
+      - `def __init__(self, mobject, target_mobject, stretch=True, dim_to_match=1, **kwargs)`
+      - **Example**: `fade = FadeTransform(square, circle)`
+
+2. **Methods**:
+   - `begin()`: Initial setup for the animation.
+   - `clean_up_from_scene(scene)`: Clean up the Scene after finishing the animation.
+   - `get_all_families_zipped()`
+   - `get_all_mobjects()`
+   - `ghost_to(target)`: Replaces the source by the target and sets the opacity to 0.
+
+3. **Attributes**:
+   - `path_arc`
+   - `path_func`
+
+**Usage**: Fade one mobject into another with various optional parameters like stretch and dim matching. Other methods for setup and clean-up are also available.
+- ApplyMatrix: ApplyMatrix(mobject, matrix, **kwargs)
+  Example: ApplyMatrix(square, [[2, 0], [0, 1]])
+
+- FadeToColor: FadeToColor(mobject, color, **kwargs)
+  Example: FadeToColor(circle, YELLOW)
+
+- ReplacementTransform: ReplacementTransform(mobject, target_mobject, **kwargs)
+  Example: ReplacementTransform(square, triangle)
+
+- ScaleInPlace: ScaleInPlace(mobject, scale_factor, **kwargs)
+  Example: ScaleInPlace(circle, 2)
+
+- Transform: Transform(mobject, target_mobject, **kwargs)
+  Example: Transform(circle, triangle)
+
+-TransformFromCopy: TransformFromCopy(mobject, target_mobject, **kwargs)
+  Example: TransformFromCopy(rectangle, circle)
+1. `TransformMatchingAbstractBase`
+   - Abstract base class for transformations that keep track of matching parts.
+   - Usage: To create custom transformations keeping track of identical parts.
+   - Example:
+     ```python
+     class CustomTransform(TransformMatchingAbstractBase):
+         def create_config(self):
+             return {...}
+     ```
+
+2. `TransformMatchingShapes`
+   - An animation attempting to transform groups by matching the shape of their submobjects.
+   - Syntax: `TransformMatchingShapes(Scene, *args, **kwargs)`
+   - Usage: Matches shapes of submobjects for transformations during animations.
+   - Example:
+     ```python
+     anim = TransformMatchingShapes(scene, obj_group1, obj_group2)
+     ```
+
+3. `TransformMatchingTex`
+   - Transformation to convert rendered LaTeX strings.
+   - Syntax: `TransformMatchingTex(Scene, *args, **kwargs)`
+   - Usage: Used to transform LaTeX strings during animations.
+   - Example:
+     ```python
+     tex_anim = TransformMatchingTex(scene, tex1, tex2)
+     ```
+- `class TransformMatchingAbstractBase(AnimationGroup)`: Abstract base class for transformations that keep track of matching parts.
+  - `mobject (Mobject)`: The starting Mobject.
+  - `target_mobject (Mobject)`: The target Mobject.
+  - `transform_mismatches (bool)`: Controls subobjects without matching key being transformed using Transform. Default: False.
+  - `fade_transform_mismatches (bool)`: Controls subobjects without matching key being transformed using FadeTransform. Default: False.
+  - `key_map (dict | None)`: Optional dictionary mapping keys from start Mobject to target Mobject's subobjects.
+  - `kwargs`: Additional keyword arguments passed to subobject transformations.
+
+- Methods:
+  - `clean_up_from_scene(scene)`: Cleans up Scene after animation completion.
+  - `get_mobject_key`: Abstract method for subclasses to implement.
+  - `get_mobject_parts`: Abstract method for subclasses to implement.
+  - `get_shape_map`.
+
+- Syntax:
+```
+class TransformMatchingAbstractBase(AnimationGroup):
+    def __init__(self, mobject, target_mobject, transform_mismatches=False, fade_transform_mismatches=False, key_map=None, **kwargs):
+        pass
+
+    def clean_up_from_scene(self, scene):
+        pass
+
+    def get_mobject_key(self):
+        pass
+
+    def get_mobject_parts(self):
+        pass
+
+    def get_shape_map(self):
+        pass
+``` 
+
+- Example (Usage):
+```python
+class MyTransform(TransformMatchingAbstractBase):
+    def __init__(self, mobject, target_mobject):
+        super().__init__(mobject, target_mobject)
+
+    def get_mobject_key(self):
+        return {...}
+
+    def get_mobject_parts(self):
+        return [...]
+
+    def get_shape_map(self):
+        return {...}
+
+# Usage:
+mobject = ...
+target_mobject = ...
+my_transform = MyTransform(mobject, target_mobject)
+```
+```python
+class manim.animation.transform_matching_parts.TransformMatchingShapes(TransformMatchingAbstractBase)
+```
+
+### Methods:
+1. **get_mobject_key**
+```python
+get_mobject_key(mobject, key_map=None)
+```
+Get the key for a mobject.
+
+2. **get_mobject_parts**
+```python
+get_mobject_parts(mobject)
+```
+Get the parts of a mobject.
+
+### Parameters:
+- `mobject (Mobject)`  Mobject to be transformed.
+- `target_mobject (Mobject)`  Mobject to transform to.
+- `transform_mismatches (bool)`  Indicates if mismatches should be transformed.
+- `fade_transform_mismatches (bool)`  Indicates if mismatches should be faded during transformation.
+- `key_map (dict | None)`  Mapping dictionary (optional).
+
+### Example:
+```python
+get_mobject_key(mobject, key_map={'A': 'B', 'C': 'D'})
+```
+- **Command Syntax**: `MoveToTarget(mobject: Mobject, path_func: FunctionType = path_along_arc, **kwargs)`
+
+### **Important Commands**:
+1. `MoveToTarget`
+   - **Syntax**: `MoveToTarget(mobject: Mobject, path_func: FunctionType = path_along_arc, **kwargs)`
+   - **Usage**: Transforms a mobject to the mobject stored in its target attribute.
+
+2. `generate_target`
+   - **Syntax**: `generate_target()`
+   - **Usage**: Populates the target attribute of the mobject with a copy of it for further modification.
+
+3. `play`
+   - **Syntax**: `play(animation: Animation)`
+   - **Usage**: Begins playing the specified animation.
+
+### **Example**:  
+```python
+from manim.animation.transform import MoveToTarget
+from manim import Circle
+
+circle = Circle()
+circle.generate_target()
+circle.target.shift(2 * UP)
+
+move_to_target_anim = MoveToTarget(circle)
+```
+In this example, a circle is generated and then shifted upwards by 2 units using `generate_target()` and `shift()`. The `MoveToTarget` animation then transforms the original circle into the modified one stored in the target attribute.
+Command: ReplacementTransform(mobject, target_mobject, **kwargs)
+
+Description: Replaces and morphs a mobject into a target mobject.
+
+Usage: 
+```python
+ReplacementTransform(mobject, target_mobject, **kwargs)
+```
+
+Example:
+```python
+ReplacementTransform(square, circle)
+```
+Command: `Restore(mobject: Mobject, *args, **kwargs)`
+
+Description: Transforms a mobject to its last saved state.
+
+Usage: To save the state of a mobject, use the `save_state()` method.
+
+Example:
+```python
+Restore(mobject)
+```
+
+Attributes:
+- `path_arc`
+- `path_func`
+- `mobject (Mobject)`
+**Command:**  
+```python
+class ScaleInPlace(ApplyMethod)
+```
+
+**Usage:**  
+Animation that scales a mobject by a certain factor.
+

@@ -1,0 +1,118 @@
+**Attributes:**  
+- `path_arc`
+- `path_func`
+- `mobject` (Mobject)
+- `scale_factor` (float)
+
+**Example Usage:**  
+```python
+scale_anim = ScaleInPlace(mobject, scale_factor=2)
+```
+Command: ShrinkToCenter
+
+Syntax:
+```python
+class ShrinkToCenter(ScaleInPlace)
+```
+
+Description:
+Animation that shrinks a mobject to the center of the screen.
+
+Attributes:
+- path_arc: The path arc of the animation.
+- path_func: The path function of the animation.
+- mobject (Mobject): The mobject to be animated.
+
+Example:
+```python
+from manim.animation.transform import ShrinkToCenter
+shrink_anim = ShrinkToCenter(mobject=my_mobject)
+```
+### Commands Summary:
+```python
+manim.animation.transform.Swap
+```
+
+### Description:
+- Inherits from `CyclicReplace`.
+- Contains methods and attributes like `path_arc`, `path_func`, and `mobjects`.
+  
+### Important Commands:
+
+1. **Attributes:**
+   ```python
+   path_arc (float)
+   ```
+
+2. **Usage:**
+   - Represents the `Swap` class in the `manim.animation.transform` module.
+
+### Example:
+```python
+from manim.animation.transform import Swap
+
+swap_transform = Swap()
+```
+- `interpolate(alpha: float)`: Set the animation progress.
+
+Syntax:
+```python
+interpolate(alpha: float)
+```
+
+Example:
+```python
+animation.interpolate(0.5)
+```
+
+- Attributes:
+    - `path_arc`: (type not specified)
+
+- Attributes:
+    - `path_func`: (type not specified)
+
+- Attributes:
+    - `start_anim (Animation)`: starting animation for the transition
+    - `end_anim (Animation)`: ending animation for the transition
+    - `rate_func (Callable)`: function that determines how the animation progresses from start to end
+
+Syntax:
+Not provided.
+- Command: `manim.animation.transform.TransformFromCopy`
+- Base Class: `Transform`
+- Description: Performs a reversed transformation
+- Attributes:
+  - `path_arc`
+  - `path_func`
+  - `mobject` (Mobject)
+  - `target_mobject` (Mobject)
+- Method: `interpolate`
+  - Description: Set the animation progress
+  - Parameters:
+    - `alpha` (float): The relative time to set the animation to (0 = start, 1 = end)
+  - Usage: This method gets called for every frame during an animation.
+
+Example:
+```python
+tf = TransformFromCopy(mobject, target_mobject)
+self.play(tf)
+```
+- **Transform:**
+    - Transform(mobject: Mobject = None, target_mobject: Mobject = None, path_func: Callable = None, path_arc: float = 0.0, path_arc_axis: np.ndarray = None, path_arc_centers: np.ndarray = None, replace_mobject_with_target_in_scene: bool = False)
+    - Transforms a Mobject into a target Mobject.
+  
+- **Methods:**
+    - `begin`: Begins the animation.
+    - `clean_up_from_scene(scene: Scene)`: Cleans up the Scene after finishing the animation.
+    - `create_target`: Creates the target of the transformation.
+    - `get_all_families_zipped`: Gets all family objects zipped.
+    - `get_all_mobjects`: Gets all mobjects involved in the animation.
+
+- **Attributes:**
+    - `path_arc`: Arc angle for the paths.
+    - `path_func`: Function defining the path of movement.
+
+- **Example:**
+    - `transform_arc = Transform(mobject=my_mobject, target_mobject=target_mobject, path_func=path_func, path_arc=0.5)`
+
+

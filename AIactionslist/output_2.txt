@@ -1,0 +1,419 @@
+6. **ShowIncreasingSubsets**
+   - Syntax: `ShowIncreasingSubsets(mobject)`
+   - Usage: Show one submobject at a time, leaving previous ones displayed.
+   - Example: `self.play(ShowIncreasingSubsets(mobj_group))`
+   
+7. **ShowPartial**
+   - Syntax: `ShowPartial(mobject)`
+   - Usage: Abstract class for Animations that show the VMobject partially.
+   - Example: `self.play(ShowPartial(mobject))`
+   
+8. **ShowSubmobjectsOneByOne**
+   - Syntax: `ShowSubmobjectsOneByOne(mobject)`
+   - Usage: Show one submobject at a time, removing previous ones.
+   - Example: `self.play(ShowSubmobjectsOneByOne(mobject_group))`
+   
+9. **SpiralIn**
+   - Syntax: `SpiralIn(mobject)`
+   - Usage: Create the Mobject with sub-Mobjects flying in on spiral trajectories.
+   - Example: `self.play(SpiralIn(mobject))`
+   
+10. **Uncreate**
+    - Syntax: `Uncreate(mobject)`
+    - Usage: Like Create but in reverse.
+    - Example: `self.play(Uncreate(mobject))`
+    
+11. **Unwrite**
+    - Syntax: `Unwrite(mobject)`
+    - Usage: Simulate erasing by hand a Text or a VMobject.
+    - Example: `self.play(Unwrite(text))`
+    
+12. **Write**
+    - Syntax: `Write(mobject)`
+    - Usage: Simulate hand-writing a Text or hand-drawing a VMobject.
+    - Example: `self.play(Write(text))`
+**Command Syntax and Usage:**
+
+```python
+class manim.animation.creation.RemoveTextLetterByLetter(manim.animation.creation.AddTextLetterByLetter)
+```
+
+- **Arguments:**
+    - `time_per_char` (float): Frequency of appearance of the letters.
+    - `tip` (str): Currently only possible for Text and not MathTex.
+    - `text` (Text): The text object to remove letter by letter.
+    - `suspend_mobject_updating` (bool): Whether to suspend updating.
+    - `int_func` (Callable[[np.ndarray], np.ndarray]): Custom interpolation function.
+    - `rate_func` (Callable[[float], float]): Custom rate function for the animation.
+    - `run_time` (float | None): How long the animation should run.
+
+- **Example:**
+```python
+self.play(manim.animation.creation.RemoveTextLetterByLetter(text, time_per_char=0.1))
+``` 
+
+This command removes a `Text` object letter by letter from the scene with specified arguments like time_per_char, rate_func, etc.
+**Command Syntax and Usage**:
+
+1. `ShowIncreasingSubsets(group, suspend_mobject_updating=False, int_func=None)`
+
+   Show one submobject at a time, leaving all previous ones displayed on screen.
+
+   **Example**:
+
+   ```python
+   from manim.animation.creation import ShowIncreasingSubsets
+
+   subsets_animation = ShowIncreasingSubsets(group=mobject_group)
+   self.play(subsets_animation)
+   ```
+
+2. `interpolate_mobject(alpha)`
+
+   Interpolates the mobject of the Animation based on alpha value.
+
+   **Usage**:
+
+   - `alpha` (float): A float between 0 and 1 expressing the ratio to which the animation is completed.
+
+3. `update_submobject_list(alpha)`
+
+   Interpolates the mobject of the Animation based on alpha value.
+
+   **Usage**:
+
+   - `alpha` (float): A float between 0 and 1 expressing the ratio to which the animation is completed.
+Command Syntax:
+```python
+class ShowPartial(manim.animation.animation.Animation)
+```
+
+Usage:
+Abstract class for animations that show a VMobject partially.
+
+Example:
+```python
+class ShowPartialExample(ShowPartial):
+    def construct(self):
+        pass
+```
+Command: manim.animation.creation.ShowSubmobjectsOneByOne
+
+Method:
+- update_submobject_list(group, int_func)
+
+Usage:
+- This command shows one submobject at a time, removing all previously displayed ones from the screen.
+
+Syntax:
+```python
+manim.animation.creation.ShowSubmobjectsOneByOne.update_submobject_list(group, int_func)
+```
+
+Example:
+```python
+class MyScene(Scene):
+    def construct(self):
+        circle = Circle()
+        square = Square()
+        triangle = Triangle()
+        
+        self.play(ShowSubmobjectsOneByOne(circle, square, triangle))
+```
+In this example, the `ShowSubmobjectsOneByOne` command is used to show the submobjects `circle`, `square`, and `triangle` one by one on the screen, removing the previously displayed ones.
+1. **Qualified name**: `manim.animation.creation.SpiralIn`
+
+2. **Syntax**:
+   ```python
+   class SpiralIn(Animation):
+       def __init__(self, shapes, scale_factor=1, fade_in_fraction=0.5, **kwargs):
+           pass
+
+       def interpolate_mobject(self, alpha):
+           pass
+   ```
+
+3. **Usage**:
+   - Create a Mobject with sub-Mobjects flying in on spiral trajectories:
+     ```python
+     spiral_in_animation = SpiralIn(shapes=mobject_name, scale_factor=1.5, fade_in_fraction=0.3)
+     ```
+
+4. **Methods**:
+   - `interpolate_mobject`:
+     - **Syntax**:
+       ```python
+       def interpolate_mobject(self, alpha):
+           pass
+       ```
+     - Interpolates the Mobject of the Animation based on alpha value.
+Command: `Uncreate(mobject, reverse_rate_function=False, remover=False)`
+
+Description: Like Create but in reverse, this command uncreates the specified mobject.
+
+- `mobject (VMobject | OpenGLVMobject)`: The mobject to uncreate.
+- `reverse_rate_function (bool)`: If the rate function should be reversed.
+- `remover (bool)`: If the object should be removed after uncreating.
+
+Example:
+```python
+from manim import *
+
+class ShowUncreateExample(Scene):
+    def construct(self):
+        circle = Circle()
+        self.play(ShowCreation(circle))
+        self.wait(1)
+        self.play(Uncreate(circle))
+        self.wait(1)
+```
+
+Reference: [Create](https://docs.manim.community/en/stable/reference/manim.animation.creation.Create.html)
+- Syntax: Unwrite(vmobject=None, rate_func=None, reverse=False)
+- Usage: This command simulates erasing a Text or a VMobject by hand.
+- Example: 
+```python
+from manim import *
+
+class UnwriteReverseTrue(Scene):
+    def construct(self):
+        text = Text("Hello, World!")
+        self.play(Unwrite(text, reverse=True))
+
+class UnwriteReverseFalse(Scene):
+    def construct(self):
+        text = Text("Hello, Manim!")
+        self.play(Unwrite(text, reverse=False))
+```
+COMMANDS:
+1. Class Name: manim.animation.creation.Write
+   - Bases: DrawBorderThenFill
+   - Simulates hand-writing a Text or hand-drawing a VMobject.
+
+2. Methods:
+   - begin(): Begins the animation.
+   - finish(): Finishes the animation.
+   - reverse_submobjects(vmobject, rate_func, reverse): Reverses the sub-mobjects.
+
+3. Syntax:
+   - begin()
+   - finish()
+
+4. Example:
+   - show_write = Write(text=mobject)
+   - show_write.begin()
+- **Command Syntax:**
+```python
+FadeIn(mobjects, shift=UP, target_position=None, scale=1, **kwargs)
+```
+
+- **Usage:**
+Fade in specified `mobjects` with optional parameters like `shift`, `target_position`, `scale`, and additional kwargs.
+
+- **Example:**
+```python
+fade_in = FadeIn(square)
+```
+
+This command belongs to Manim's animation module for fading in mobjects and provides parameters for customization such as shift, target position, and scaling of the mobjects during the fade-in process.
+Command: FadeOut(mobjects, shift=ORIGIN, target_position=None, scale=1)
+- Fades out the specified mobjects with optional shifting, moving to target position, and scaling.
+- mobjects: The mobjects to be faded out.
+- shift(optional): Vector by which the mobject shifts while being faded out.
+- target_position(optional): The position to which the mobject moves while being faded out. If another mobject is given, its center is used.
+- scale(optional): The factor by which the mobject is scaled while being faded out.
+
+Example:
+```python
+from manim import *
+class FadeOutExample(Scene):
+    def construct(self):
+        circle = Circle()
+        self.play(FadeOut(circle))
+```
+
+Method: clean_up_from_scene(scene=None)
+- Cleans up the Scene after finishing the animation.
+- scene(optional): The scene where the animation should be cleaned up from. If not provided, cleans up the current scene.
+
+Attribute:
+- path_arc: 
+- path_func: 
+Clean up the Scene after finishing the animation. This includes to remove() the Animation's Mobject if the animation is a remover.
+
+Example:
+```python
+from manim import *
+class CleanUpExample(Scene):
+    def construct(self):
+        circle = Circle()
+        fade_out = FadeOut(circle)
+        self.play(fade_out)
+        fade_out.clean_up_from_scene(self)
+```
+Commands:
+1. FadeIn
+   Syntax: FadeIn(mobject, run_time=1)
+   Usage: Used to fade in a Mobject.
+   Example: ```python
+            FadeIn(mobject)
+            ```
+
+2. FadeOut
+   Syntax: FadeOut(mobject, run_time=1)
+   Usage: Used to fade out a Mobject.
+   Example: ```python
+            FadeOut(mobject)
+            ```
+### Command Syntax and Usage:
+
+**Name:** `GrowArrow(arrow: Arrow, point_color: str = None, **kwargs)`
+
+- **Usage:** Introduce an Arrow by growing it from its start toward its tip.
+- **Parameters:**
+  - `arrow (Arrow)`: The arrow to be introduced.
+  - `point_color (str)`: Initial color of the arrow before growing to its full size. (Leave empty to match arrows color)
+  - `**kwargs`: Additional keyword arguments.
+
+**Methods:**
+- `create_starting_mobject()`: Creates the starting mobject.
+  
+**Attributes:**
+- `path_arc`: Attribute related to the path's curvature.
+- `path_func`: Attribute related to the path function.
+
+**Examples:**
+```python
+from manim import *
+
+class GrowArrowExample(Scene):
+    def construct(self):
+        arrow = Arrow(LEFT, RIGHT)
+        self.play(GrowArrow(arrow))
+```
+
+In the above example, a `GrowArrow` animation introduces an arrow by growing it from its start towards its tip.
+Command Syntax:
+```python
+manim.animation.growing.GrowFromCenter(mobject, point_color=None, **kwargs)
+```
+
+Usage:
+Introduce an Mobject by growing it from its center.
+
+- `mobject` (Mobject): The mobjects to be introduced.
+- `point_color` (str): Initial color of the mobject before growing to its full size. Leave empty to match mobjects color.
+
+Example:
+```python
+from manim import *
+
+class GrowFromCenterExample(Scene):
+    def construct(self):
+        circle = Circle()
+        self.play(GrowFromCenter(circle))
+```
+
+Attributes:
+- `path_arc`
+- `path_func`
+#### Command Syntax and Usage:
+
+**Command:** `GrowFromEdge(mobject, edge, point_color=None)`
+
+**Description:** Introduce an Mobject by growing it from one of its bounding box edges.
+
+- `mobject (Mobject)`: The mobject to be introduced.
+- `edge (np.ndarray)`: The direction to seek the bounding box edge of the mobject.
+- `point_color (str)`: Initial color of the mobject before growing to its full size. Leave empty to match the mobject's color.
+
+**Example:**
+```python
+from manim import *
+
+class GrowFromEdgeExample(Scene):
+    def construct(self):
+        square = Square()
+        self.play(GrowFromEdge(square, DOWN))
+        self.wait(1)
+```
+
+**Note:** This command subclasses `GrowFromPoint` and has additional attributes like `path_arc`, `path_func`.
+- Command Syntax: GrowFromPoint(mobject, point, point_color=None)
+- Usage: Introduce an Mobject by growing it from a specific point.
+- Example: 
+```python
+from manim.animation.growing import GrowFromPoint
+
+mobject = Circle()
+point = np.array([2, 3, 0])
+animation = GrowFromPoint(mobject, point)
+```
+1. **GrowArrow**
+   - Introduces an Arrow by growing it from its start toward its tip.
+   - Syntax: `GrowArrow(mobject)`
+   - Example: `self.play(GrowArrow(arrow))`
+   
+2. **GrowFromCenter**
+   - Introduces an Mobject by growing it from its center.
+   - Syntax: `GrowFromCenter(mobject)`
+   - Example: `self.play(GrowFromCenter(circle))`
+   
+3. **GrowFromEdge**
+   - Introduces an Mobject by growing it from one of its bounding box edges.
+   - Syntax: `GrowFromEdge(mobject, direction=UP)`
+   - Example: `self.play(GrowFromEdge(square, direction=DOWN))`
+   
+4. **GrowFromPoint**
+   - Introduces an Mobject by growing it from a point.
+   - Syntax: `GrowFromPoint(mobject, point=ORIGIN)`
+   - Example: `self.play(GrowFromPoint(triangle, point=LEFT_SIDE))`
+   
+5. **SpinInFromNothing**
+   - Introduces an Mobject by spinning and growing it from its center.
+   - Syntax: `SpinInFromNothing(mobject)`
+   - Example: `self.play(SpinInFromNothing(star))`
+- **Command**: `SpinInFromNothing(mobject: Mobject, angle: float, point_color: str)`
+- **Usage**: Introduce an Mobject spinning and growing it from its center, with the specified angle and initial color.
+- **Example**: `SpinInFromNothing(my_mobject, 2*PI, "blue")`
+- ApplyWave Command Syntax: manim.animation.indication.ApplyWave(mobject, direction, amplitude, wave_func, time_width, ripples, run_time)
+  - Description: Sends a wave through a Mobject distorting it temporarily.
+  - mobject (Mobject): The Mobject to be distorted.
+  - direction (ndarray): The direction in which the wave nudges points of the shape.
+  - amplitude (float): The distance points of the shape get shifted.
+  - wave_func (Callable[[float], float]): The function defining the shape of one wave flank.
+  - time_width (float): The length of the wave relative to the width of the Mobject.
+  - ripples (int): The number of ripples of the wave.
+  - run_time (float): The duration of the animation.
+
+Example Usage:
+```python
+from manim.animation.indication import ApplyWave
+from numpy import array
+from manim import Circle
+
+circle_obj = Circle()
+direction = array([1, 0, 0])
+amplitude = 0.4
+time_width = 1
+ripples = 2
+animation_time = 2
+apply_wave_anim = ApplyWave(circle_obj, direction, amplitude, lambda t: 0.5, time_width, ripples, animation_time)
+```
+
+(Note: In the example above, an ApplyWave animation is created on a circle Mobject with specified parameters.)
+1. Circumscribe
+Draws a temporary line surrounding a given Mobject.
+```
+Circumscribe(mobject, shape=Rectangle, fade_in=False, fade_out=False, time_width=None, buff=0.1, color=WHITE, run_time=1, **kwargs)
+```
+- `mobject` (Mobject): The object to be circumscribed.
+- `shape` (Type): The shape to surround the given mobject (Rectangle or Circle).
+- `fade_in` (bool): Whether to fade in the surrounding shape.
+- `fade_out` (bool): Whether to fade out the surrounding shape.
+- `time_width` (float): Time width of drawing and undrawing (ignored if fade_in/fade_out is True).
+- `buff` (float): Distance between the surrounding shape and the mobject.
+- `color` (color value): Color of the surrounding shape.
+- `run_time` (float): Duration of the animation.
+- `kwargs`: Additional arguments for the Succession constructor.
+

@@ -1,0 +1,417 @@
+- `__init__(self, mobject=None, lag_ratio=0, run_time=1, rate_func=smooth, name=None, remover=False, suspend_mobject_updating=True)`
+  Example: `anim = Animation(mobject=some_mobject, run_time=2)`
+
+- `begin()`: Begin the animation.
+
+- `clean_up_from_scene(scene)`: Clean up the Scene after finishing the animation.
+
+- `copy()`: Create a copy of the animation.
+
+- `finish()`: Finish the animation.
+
+- `get_all_mobjects()`: Get all mobjects involved in the animation.
+
+- `get_all_mobjects_to_update()`: Get all mobjects to be updated during the animation.
+
+- `get_rate_func()`: Get the rate function of the animation.
+
+- `get_run_time()`: Get the run time of the animation.
+
+- `get_sub_alpha(alpha, index, num_submobjects)`: Get the animation progress of any submobjects subanimation.
+
+- `interpolate(alpha)`: Set the animation progress.
+
+- `interpolate_mobject(alpha)`: Interpolates the mobject of the Animation based on alpha value.
+
+- `is_introducer()`: Test if the animation is an introducer.
+
+- `is_remover()`: Test if the animation is a remover.
+
+- `set_name(name)`: Set the name of the animation.
+
+- `set_rate_func(rate_func)`: Set the rate function of the animation.
+
+- `set_run_time(run_time)`: Set the run time of the animation.
+
+- `update_mobjects(dt)`: Updates things like starting_mobject and target_mobject.
+
+  Example: `anim.update_mobjects(0.1)`
+**Animate()**
+
+```
+Animate(mobjects, **kwargs)
+```
+
+- Animates the specified Mobjects.
+- **kwargs: Additional keyword arguments for the animation, such as duration or run_time.
+
+Example: 
+```python
+Animate(my_mobject, run_time=2)
+```
+
+**Wait()**
+
+```
+Wait(time)
+```
+
+- Pauses the animation for a specified duration.
+- time: The duration of the pause in seconds.
+
+Example:
+```python
+Wait(1)
+```
+
+**@OverrideAnimation**
+
+```
+@OverrideAnimation(animation_class)
+```
+
+- Decorator that marks a method as overriding a specific Animation type.
+- animation_class: The animation to be overridden.
+
+Example:
+```python
+@OverrideAnimation(FadeIn)
+```
+Command:
+Wait(run_time, stop_condition=None, frozen_frame=None, **kwargs)
+
+Usage:
+Create a wait animation to pause the scene for a specified run time or until a stop condition is met.
+
+Example:
+```python
+wait_animation = Wait(2)  # Pause the scene for 2 seconds
+```
+
+Method:
+- begin()
+- clean_up_from_scene(scene)
+- finish()
+- interpolate(alpha)
+- update_mobjects(dt)
+
+Usage:
+Included methods to begin, clean up, finish, set progress, and update mobjects during the animation.
+
+Example:
+```python
+wait_animation.begin()
+```
+- `full_family_become_partial()`: Converts all copies of the boundary to AnimatedBoundary.
+Syntax: `full_family_become_partial()`
+Example: `animated_boundary.full_family_become_partial()`
+
+- `update_boundary_copies()`: Updates the copies of the boundary.
+Syntax: `update_boundary_copies()`
+Example: `animated_boundary.update_boundary_copies()`
+
+- `animate`: Used to animate the application of any method of self.
+Attributes:
+  - `animation_overrides`
+  - `color`
+  - `depth`
+  - `fill_color`
+  - `height`
+  - `n_points_per_curve`
+  - `sheen_factor`
+  - `stroke_color`
+  - `width`
+Syntax: `animate`
+Example: `animated_boundary.animate`
+1. AnimatedBoundary:
+Syntax: AnimatedBoundary(mobject, cycle_color=["BLUE", "GREEN"], time_width=1)
+Usage: Creates an animated boundary with color changing over time.
+Example: AnimatedBoundary(circle, cycle_color=["BLUE", "GREEN"], time_width=1)
+
+2. TracedPath:
+Syntax: TracedPath(mobject, function, tracked_point_color="RED")
+Usage: Traces the path of a point returned by a function call on a specific mobject.
+Example: TracedPath(square, lambda t: square.point_from_proportion(t), tracked_point_color="RED")
+Important commands:
+
+1. **TracedPath:**
+```python
+manim.animation.changing.TracedPath(traced_point_func: Callable, stroke_width: float, stroke_color: ParsableManimColor | None, dissipating_time: float | None = None)
+```
+- Traces the path of a point returned by a function call.
+- Parameters:
+  - `traced_point_func (Callable)`: The function to be traced.
+  - `stroke_width (float)`: The width of the trace.
+  - `stroke_color (ParsableManimColor | None)`: The color of the trace.
+  - `dissipating_time (float | None)`: Time taken for the path to dissipate (default: None).
+
+2. **update_path:**
+```python
+update_path()
+```
+- Method to update the path.
+
+3. **animate:**
+```python
+animate()
+```
+- Used to animate the application of any method of self.
+
+4. **Attributes:**
+   - `color`
+   - `depth`
+   - `fill_color`
+   - `height`
+   - `n_points_per_curve`
+   - `sheen_factor`
+   - `stroke_color`
+   - `width`
+
+5. **Initialization Syntax:**
+```python
+__init__(traced_point_func: Callable, stroke_width: float, stroke_color: Optional[Union[ManimColor, int, str, Tuple[int, int, int], Tuple[float, float, float], Tuple[int, int, int, int], Tuple[float, float, float, float], ndarray[Any, dtype[int64]], ndarray[Any, dtype[float64]]]], dissipating_time: float | None) -> None
+```
+- Parameters:
+  - `traced_point_func (Callable)`
+  - `stroke_width (float)`
+  - `stroke_color (Optional[Union[ManimColor, int, str, Tuple[int, int, int], Tuple[float, float, float], Tuple[int, int, int, int], Tuple[float, float, float, float], ndarray[Any, dtype[int64]], ndarray[Any, dtype[float64]]])`
+  - `dissipating_time (float | None)`
+
+These are the essential commands for the `TracedPath` class with their syntax and details.
+- Begin the animation: `begin`
+  - This method initiates the animation.
+  - Example: `animation_group.begin()`
+
+- Create list of animation timings: `build_animations_with_timings`
+  - Creates a list of animation triplets including animation object, start time, and end time.
+  - Example: `animation_group.build_animations_with_timings()`
+
+- Clean up scene after animation: `clean_up_from_scene`
+  - Cleans up the Scene after finishing the animation.
+  - Example: `animation_group.clean_up_from_scene(scene)`
+
+- Finish the animation: `finish`
+  - Finalizes the animation.
+  - Example: `animation_group.finish()`
+
+- Retrieve all mobjects involved: `get_all_mobjects`
+  - Gets all mobjects involved in the animation.
+  - Example: `animation_group.get_all_mobjects()`
+
+- Calculate animation runtime: `init_run_time`
+  - Calculates the run time of the animation if different from the specified run time.
+  - Example: `animation_group.init_run_time(run_time)`
+
+- Set animation progress: `interpolate`
+  - Updates the animation progress for a specific frame.
+  - Example: `animation_group.interpolate(alpha)`
+
+- Update mobjects: `update_mobjects`
+  - Updates starting_mobject and target_mobject during animations.
+  - Example: `animation_group.update_mobjects(dt)`
+1. AnimationGroup:
+Syntax: AnimationGroup(*args)
+Usage: Play a group or series of animations simultaneously.
+
+Example: 
+anim_group = AnimationGroup(anim1, anim2)
+anim_group.play()
+
+2. LaggedStart:
+Syntax: LaggedStart(*anims, lag_ratio=0.5)
+Usage: Adjusts the timing of a series of animations based on lag_ratio.
+
+Example: 
+lagged_start = LaggedStart(anim1, anim2, lag_ratio=0.3)
+lagged_start.play()
+
+3. LaggedStartMap:
+Syntax: LaggedStartMap(mapper_func, anim_sequence, lag_ratio=0.5, run_time=None, rate_func=None)
+Usage: Plays a series of animations while applying a function to submobjects.
+
+Example:
+lagged_start_map = LaggedStartMap(func, anim_sequence, lag_ratio=0.2)
+lagged_start_map.play()
+
+4. Succession:
+Syntax: Succession(*anims, lag_ratio=0.8, **kwargs)
+Usage: Plays a series of animations in succession with lag_ratio as the delay between animations.
+
+Example: 
+succession = Succession(anim1, anim2, anim3, lag_ratio=0.5)
+succession.play()
+- Command Syntax: manim.animation.composition.LaggedStartMap(AnimationClass, mobject, arg_creator, run_time)
+- AnimationClass: Animation to apply to mobject
+- mobject: Mobject whose submobjects the animation, and optionally the function, are applied
+- arg_creator: Function applied to Mobject
+- run_time: Duration of the animation in seconds
+
+- Usage: Plays a series of Animations on submobjects of a mobject while mapping a function to them.
+- Example:
+    ```python
+    LaggedStartMap(FadeIn, square, lambda m: m.next_to, run_time=2)
+    ```
+```python
+class manim.animation.composition.LaggedStart(AnimationGroup):
+    def __init__(self, *animations, lag_ratio=0.05):
+        """
+        Adjusts the timing of a series of Animation according to lag_ratio.
+
+        Parameters:
+        animations (Animation): Sequence of Animation objects to be played.
+        lag_ratio (float): Defines the delay after which the animation is applied to submobjects.
+                          Defaults to 0.05.
+        """
+
+# Example of using LaggedStart
+lagged_start_anim = LaggedStart(Create(square), FadeIn(circle), lag_ratio=0.1)
+```
+- **Module and Class**: `manim.animation.composition.Succession`
+
+- **Syntax**:
+  ```python
+  Succession(*animations, lag_ratio=1.0)
+  ```
+
+- **Usage**: Plays a series of animations in succession.
+  
+- **Parameters**:
+  - `animations (Animation)`: Sequence of Animation objects to be played.
+  - `lag_ratio (float)`: Defines the delay for next animation based on current animation's progress. Defaults to 1.0.
+  
+- **Methods**:
+  - `begin()`: Begin the animation.
+  - `finish()`: Finish the animation.
+  - `interpolate(alpha)`: Set animation progress.
+  - `next_animation()`: Proceeds to the next animation.
+  - `update_active_animation()`: Setup the Scene before starting the animation.
+  - `update_mobjects(dt)`: Updates starting_mobject and target_mobject.
+  
+- **Examples**:
+  ```python
+  Succession(ShowCreation(circle), FadeIn(square), lag_ratio=0.5)
+  ```
+- **Syntax**: `AddTextLetterByLetter(text: Text, time_per_char: float, run_time: Optional[float] = None, tip:: str = '', suspend_mobject_updating: bool = False, int_func: Callable[[np.ndarray], np.ndarray] = lambda x: x, rate_func: Callable[[float], float] = linear)`
+- **Description**: This command in manim displays the given text letter by letter on the scene with the specified frequency.
+- **Usage**:
+  
+```python
+from manim.animation.creation import AddTextLetterByLetter
+
+class TextByLetterScene(Scene):
+    def construct(self):
+        text = Text("Hello, World!")
+        self.play(AddTextLetterByLetter(text, time_per_char=0.1))
+```
+
+- **Parameters**:
+  - `text (Text)`: The text to be displayed.
+  - `time_per_char (float)`: Frequency of appearance of the letters.
+  - `run_time (Optional[float] = None)`: Duration of animation. Default is None.
+  - `tip (str = '')`: Additional tip text (for specific classes).
+  - `suspend_mobject_updating (bool = False)`: Whether to suspend mobject updating. Default is False.
+  - `int_func (Callable[[np.ndarray], np.ndarray])`: Interpolation function. Default is identity function.
+  - `rate_func (Callable[[float], float])`: Rate function of animation. Default is linear.
+- **Command Syntax:**
+```plaintext
+manim.animation.creation.AddTextWordByWord(text_mobject, run_time, time_per_char)
+```
+
+- **Usage:**
+This command is used to show a text word by word on the scene. Note that it is currently broken.
+
+- **Example:**
+```python
+from manim import *
+
+class TextWordByWordExample(Scene):
+    def construct(self):
+        text = Text("Hello, Manim!")
+        self.play(AddTextWordByWord(text, run_time=3, time_per_char=0.5))
+```
+Command: Create(mobject, lag_ratio=1, introducer=False)
+
+- mobject (VMobject | OpenGLVMobject | OpenGLSurface): The VMobject to animate.
+- lag_ratio (float): Specifies the lag ratio for the animation (default is 1).
+- introducer (bool): Specifies whether to introduce the VMobject.
+- Raises TypeError if mobject is not an instance of VMobject.
+
+Example:
+```python
+from manim import *
+
+class CreateScene(Scene):
+    def construct(self):
+        circle = Circle()
+        self.play(Create(circle))
+```
+
+Additional reference:
+- ShowPassingFlash
+- **Name:** manim.animation.creation.DrawBorderThenFill
+- **Syntax:**
+```python
+class DrawBorderThenFill(Animation):
+    def __init__(self, vmobject (VMobject | OpenGLVMobject), run_time (float), rate_func (Callable[[float], float]), stroke_width (float), stroke_color (str), draw_border_animation_config (dict), fill_animation_config (dict), introducer (bool)):
+        ...
+    
+    def begin(self):
+        ...
+        
+    def get_all_mobjects(self):
+        ...
+        
+    def get_outline(self):
+        ...
+        
+    def get_stroke_color(self):
+        ...
+        
+    def interpolate_submobject(self):
+        ...
+```
+- **Usage:** Draw the border first and then show the fill.
+
+- **Example:**
+```python
+from manim import Animation, VMobject, DrawBorderThenFill
+
+class ShowDrawBorderThenFill(Animation):
+    def construct(self):
+        vmobject = VMobject()
+        anim = DrawBorderThenFill(vmobject, run_time=2, rate_func=None, stroke_width=1, stroke_color="WHITE", draw_border_animation_config=None, fill_animation_config=None, introducer=False)
+        self.play(anim)
+```
+
+- **Methods:** 
+    - `begin()`: Begin the animation.
+    - `get_all_mobjects()`: Get all mobjects involved in the animation.
+    - `get_outline()`: Get the outline of the animation.
+    - `get_stroke_color()`: Get the stroke color of the animation.
+    - `interpolate_submobject()`: Interpolate submobjects involved in the animation.
+
+1. **AddTextLetterByLetter**
+   - Syntax: `AddTextLetterByLetter(mobject)`
+   - Usage: Show a Text letter by letter on the scene.
+   - Example: `self.play(AddTextLetterByLetter(text))`
+   
+2. **AddTextWordByWord**
+   - Syntax: `AddTextWordByWord(mobject)`
+   - Usage: Show a Text word by word on the scene.
+   - Example: `self.play(AddTextWordByWord(text))`
+   
+3. **Create**
+   - Syntax: `Create(mobject)`
+   - Usage: Incrementally show a VMobject.
+   - Example: `self.play(Create(mobject))`
+   
+4. **DrawBorderThenFill**
+   - Syntax: `DrawBorderThenFill(mobject)`
+   - Usage: Draw the border first and then show the fill.
+   - Example: `self.play(DrawBorderThenFill(shape))`
+   
+5. **RemoveTextLetterByLetter**
+   - Syntax: `RemoveTextLetterByLetter(mobject)`
+   - Usage: Remove a Text letter by letter from the scene.
+   - Example: `self.play(RemoveTextLetterByLetter(text))`
+
